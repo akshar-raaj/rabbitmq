@@ -14,4 +14,4 @@ WORKDIR /work
 
 RUN pip install -r requirements.txt
 
-CMD ["tail", "-f"]
+CMD ["celery", "-A", "hello", "worker", "--loglevel", "INFO"]
