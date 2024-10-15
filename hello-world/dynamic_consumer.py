@@ -6,6 +6,7 @@ channel = connection.channel()
 
 auto_ack = True if len(sys.argv) > 2 else False
 
+
 def on_message_callback(ch, method, properties, body):
     print(body)
     if auto_ack is False:
