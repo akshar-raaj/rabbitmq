@@ -1,4 +1,5 @@
 [![Linting](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml)
+[![Tests](https://github.com/akshar-raaj/rabbitmq/actions/workflows/tests.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/tests.yml)
 
 ## Overview
 
