@@ -26,6 +26,7 @@ Learnings
 Data
 1. A single publisher was able to publish 5K messages/second.
 2. Attempted publishing with 3 concurrent publishers. Was able to achieve throughput of ~ 15K messages/second.
+   This translates to ~ **1 million message per minute**.
 3. Assuming each message size is 100 bytes. Thus a throughput of 1.5 MB/second (15K/s * 100bytes).
 4. A single consumer was able to consume 5K messages/second with automatic acknowledgement.
 5. With manual acknowledgements, consumer througput slightly decreases, say 3.5 K/s.
