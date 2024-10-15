@@ -1,0 +1,10 @@
+services:
+  celery-example:
+    container_name: cel-ex
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: /Users/akshar/Play/RabbitMQ/celery-examples
+        target: /work
+    network_mode: "host"
