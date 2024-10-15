@@ -1,5 +1,4 @@
 import pika
-import sys
 
 
 def on_message_callback(ch, method, properties, body):
