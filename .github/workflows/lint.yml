@@ -1,7 +1,7 @@
 name: "Linting"
 on: [push]
 jobs:
-    pyflakes:
+    Standards-and-Conventions:
         runs-on: ubuntu-latest 
         steps:
             - name: Checkout
@@ -12,5 +12,9 @@ jobs:
                 python-version: '3.10'
             - name: Install pyflakes
               run: pip install pyflakes
+            - name: Install pycodestyle
+              run: pip install pycodestyle
             - name: Run Pyflakes
               run: pyflakes .
+            - name: Run Pycodestyle
+              run: pycodestyle --ignore E501 .
