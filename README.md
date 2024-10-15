@@ -1,3 +1,5 @@
+[![Linting](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml)
+
 ## Overview
 
 Explored RabbitMQ using Python pika library.
