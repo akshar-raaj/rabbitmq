@@ -1,6 +1,8 @@
 [![Linting](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml)
 [![Tests](https://github.com/akshar-raaj/rabbitmq/actions/workflows/tests.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/tests.yml)
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 ## Overview
 
 Explored RabbitMQ using Python pika library.
