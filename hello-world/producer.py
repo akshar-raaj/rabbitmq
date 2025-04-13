@@ -1,19 +1,30 @@
-import pika
 import sys
+from pika import BlockingConnection, ConnectionParameters
+
+DEFAULT_QUEUE = 'hello'
+DEFAULT_BODY = 'Hello World'
 
 
-connection = pika.BlockingConnection()
-channel = connection.channel()
+def get_connection(host='localhost', port=5672):
+    parameters = ConnectionParameters(host=host, port=port)
+    connection = BlockingConnection(parameters)
+    return connection
 
-channel.queue_declare('hello')
-channel.queue_declare('namaste')
-content = ' '.join(sys.argv[1:])
-for i in range(10):
-    numbered_content_hello = f'{i+1}: Hello {content}'
-    content_bytes = bytes(numbered_content_hello, encoding='utf-8')
-    channel.basic_publish(exchange='', routing_key='hello', body=content_bytes)
-    print(f"Published {numbered_content_hello}")
-    numbered_content_namaste = f'{i+1}: Namaste {content}'
-    channel.basic_publish(exchange='', routing_key='namaste', body=numbered_content_namaste)
-    print(f"Published {numbered_content_namaste}")
-connection.close()
+
+def publish(exchange: str, queue: str, body: str):
+    """
+    This method publishes to a queue bound to a direct exchange.
+    This will not work reliably with fanout, topic or other exchanges.
+    """
+    connection = get_connection()
+    channel = connection.channel()
+    channel.queue_declare(queue=queue)
+    channel.basic_publish(exchange=exchange, routing_key=queue, body=body)
+    # Close the connection to ensure the buffer is flushed to the network.
+    connection.close()
+
+
+if __name__ == '__main__':
+    body = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_BODY
+    queue = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_QUEUE
+    publish(exchange='', queue=queue, body=body)
