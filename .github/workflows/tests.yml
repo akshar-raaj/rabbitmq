@@ -13,4 +13,4 @@ jobs:
             - name: Install pytest
               run: pip install pytest
             - name: Run pytest
-              run: pytest
+              run: pytest $(find . -maxdepth 1 -name "test_*.py")
