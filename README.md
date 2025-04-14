@@ -37,3 +37,21 @@ Data
 4. A single consumer was able to consume 5K messages/second with automatic acknowledgement.
 5. With manual acknowledgements, consumer througput slightly decreases, say 3.5 K/s.
 6. Several concurrent consumers can allows RabbitMQ to reach a delivery rate of 10K messages/second.
+
+## Give it a spin
+
+Building the Docker image
+
+   $ docker build -t rabbitmq-producer-consumer .
+
+Running the Docker container, to start the consumer.
+
+   $ docker run --name rabbit-consumer -v .:/app -e RABBITMQ_HOST=host.docker.internal rabbitmq-producer-consumer
+
+Spin a one-off producer to enqueue/publish a message.
+
+   $ docker run --rm --name rabbit-producer -v .:/app -e RABBITMQ_HOST=host.docker.internal rabbitmq-producer-consumer python producer.py
+
+Switch to the consumer terminal, you would notice:
+
+   Received: Hello World
