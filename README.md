@@ -19,8 +19,9 @@ Concepts
 - Connection
 - Exchange
 - Queue
-- Acknowledgement
-- Durability and Persistence
+- Bindings and Routing
+- Acknowledgement: Automatic and Manual
+- Queue Durability and Message Persistence
 
 Learnings
 1. Publishers publish to an exchange.
