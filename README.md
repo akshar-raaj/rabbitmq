@@ -46,12 +46,23 @@ Building the Docker image
 
 Running the Docker container, to start the consumer.
 
-   $ docker run --name rabbit-consumer -v .:/app -e RABBITMQ_HOST=host.docker.internal rabbitmq-producer-consumer
+   $ docker run --name rabbit-consumer -v .:/app rabbitmq-producer-consumer
 
 Spin a one-off producer to enqueue/publish a message.
 
-   $ docker run --rm --name rabbit-producer -v .:/app -e RABBITMQ_HOST=host.docker.internal rabbitmq-producer-consumer python producer.py
+   $ docker run --rm --name rabbit-producer -v .:/app rabbitmq-producer-consumer python producer.py
 
 Switch to the consumer terminal, you would notice:
 
    Received: Hello World
+
+
+### Modifying the queue
+
+If you want the producer to publish to a different queue, say `hola` queue.
+
+   $ docker run --rm --name rabbit-producer -v .:/app -e QUEUE=hola rabbitmq-producer-consumer python producer.py hola "Hola Mundo"
+
+Then, configure the consumer to consume from this queue as well. Use `-e` switch with `docker run` to override the `QUEUE` environment variable.
+
+   $ docker run --name rabbit-consumer -v .:/app -e QUEUE=hola rabbitmq-producer-consumer
