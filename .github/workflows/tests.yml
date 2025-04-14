@@ -12,6 +12,8 @@ jobs:
                 python-version: '3.10'
             - name: Install pytest
               run: pip install pytest
+            - name: Install requirements
+              run: pip install -r requirements.txt
             - name: Root tests
               run: pytest $(find . -maxdepth 1 -name "test_*.py")
             - name: Direct exchange tests
