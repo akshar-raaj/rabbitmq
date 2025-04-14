@@ -1,4 +1,5 @@
 import sys
+import os
 from pika import BlockingConnection, ConnectionParameters
 
 DEFAULT_QUEUE = 'hello'
@@ -16,7 +17,8 @@ def publish(exchange: str, queue: str, body: str):
     This method publishes to a queue bound to a direct exchange.
     This will not work reliably with fanout, topic or other exchanges.
     """
-    connection = get_connection()
+    host = os.environ.get('RABBITMQ_HOST', 'localhost')
+    connection = get_connection(host)
     channel = connection.channel()
     channel.queue_declare(queue=queue)
     channel.basic_publish(exchange=exchange, routing_key=queue, body=body)
