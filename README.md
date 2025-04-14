@@ -42,27 +42,38 @@ Data
 
 Building the Docker image
 
-   $ docker build -t rabbitmq-producer-consumer .
+    $ docker build -t rabbitmq-producer-consumer .
 
 Running the Docker container, to start the consumer.
 
-   $ docker run --name rabbit-consumer -v .:/app rabbitmq-producer-consumer
+    $ docker run --name rabbit-consumer -v .:/app rabbitmq-producer-consumer
 
 Spin a one-off producer to enqueue/publish a message.
 
-   $ docker run --rm --name rabbit-producer -v .:/app rabbitmq-producer-consumer python producer.py
+    $ docker run --rm --name rabbit-producer -v .:/app rabbitmq-producer-consumer python producer.py
 
 Switch to the consumer terminal, you would notice:
 
-   Received: Hello World
+    Received: Hello World
 
 
 ### Modifying the queue
 
 If you want the producer to publish to a different queue, say `hola` queue.
 
-   $ docker run --rm --name rabbit-producer -v .:/app -e QUEUE=hola rabbitmq-producer-consumer python producer.py hola "Hola Mundo"
+    $ docker run --rm --name rabbit-producer -v .:/app -e QUEUE=hola rabbitmq-producer-consumer python producer.py hola "Hola Mundo"
 
 Then, configure the consumer to consume from this queue as well. Use `-e` switch with `docker run` to override the `QUEUE` environment variable.
 
-   $ docker run --name rabbit-consumer -v .:/app -e QUEUE=hola rabbitmq-producer-consumer
+    ß$ docker run --name rabbit-consumer -v .:/app -e QUEUE=hola rabbitmq-producer-consumer
+
+
+## Docker Hub Repository
+
+This setup can be pulled from Docker Hub registry. See https://hub.docker.com/r/raajakshar/rabbitmq
+
+The following sequence of commands will push the build image to the repository raajakshar/rabbitmq
+
+    $ docker build -t raajakshar/rabbitmq-producer-consumer .
+    $ docker tag raajakshar/rabbitmq-producer-consumer raajakshar/rabbitmq:2.0
+    $ docker push raajakshar/rabbitmq:2.0
