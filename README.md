@@ -1,6 +1,6 @@
 [![Linting](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/lint.yml)
 [![Tests](https://github.com/akshar-raaj/rabbitmq/actions/workflows/tests.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/tests.yml)
-[![Deployment](https://github.com/akshar-raaj/rabbitmq/actions/workflows/delivery.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/delivery.yml)
+[![Docker publish](https://github.com/akshar-raaj/rabbitmq/actions/workflows/delivery.yml/badge.svg)](https://github.com/akshar-raaj/rabbitmq/actions/workflows/delivery.yml)
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
