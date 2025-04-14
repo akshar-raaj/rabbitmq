@@ -1,7 +1,8 @@
 import pika
 import sys
+import os
 
-DEFAULT_QUEUE_NAME = 'hello'
+DEFAULT_QUEUE_NAME = os.environ.get('QUEUE') or 'hello'
 
 
 def on_message_callback(channel, method, properties, body):
@@ -16,7 +17,8 @@ def get_connection(host='localhost', port=5672):
 
 
 def consume(queue):
-    connection = get_connection()
+    host = os.environ.get('RABBITMQ_HOST', 'localhost')
+    connection = get_connection(host)
     channel = connection.channel()
     # Do not auto acknowledge messages. Messages should be acknowledged manually.
     channel.basic_consume(queue, on_message_callback=on_message_callback, auto_ack=False)
