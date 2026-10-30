@@ -4,6 +4,7 @@ import pika
 def on_message_callback(ch, method, properties, body):
     print("Received message")
     print(body)
+    ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def main():

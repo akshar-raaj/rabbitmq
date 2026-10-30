@@ -6,7 +6,7 @@ connection = pika.BlockingConnection()
 channel = connection.channel()
 exchange_name = 'logs'
 
-content = ' '.join(sys.argv[1:])
+content = ' '.join(sys.argv[1:]) or 'Hello World'
 
 channel.exchange_declare('logs', exchange_type='fanout')
 

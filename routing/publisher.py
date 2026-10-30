@@ -1,14 +1,21 @@
 import pika
+import sys
 
+if len(sys.argv) < 3:
+    sys.exit("Usage: python publisher.py <akshar|neelima> <message>")
+
+routing_key = sys.argv[1]
+body = ' '.join(sys.argv[2:])
 
 connection = pika.BlockingConnection()
 channel = connection.channel()
 
 channel.exchange_declare('family', exchange_type='direct')
 
-channel.queue_declare('akshar')
-channel.queue_bind('akshar', 'family', routing_key='akshar')
+# Declare and bind both queues so messages published before a consumer starts are kept.
+for queue in ('akshar', 'neelima'):
+    channel.queue_declare(queue)
+    channel.queue_bind(queue, 'family', routing_key=queue)
 
-channel.queue_declare('neelima')
-# Probably the same routing_key as the queue_name is used while binding to a direct exchange.
-channel.queue_bind('neelima', 'family')
+channel.basic_publish('family', routing_key=routing_key, body=body)
+connection.close()

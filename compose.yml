@@ -3,6 +3,11 @@ services:
     image: rabbitmq:3
     ports:
       - "5672:5672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
+      interval: 5s
+      timeout: 10s
+      retries: 12
   consumer:
     build:
       context: .
@@ -14,5 +19,6 @@ services:
     environment:
       - RABBITMQ_HOST=rabbitmq
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
 
