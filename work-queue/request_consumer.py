@@ -11,7 +11,13 @@ def on_message_callback(ch, method, properties, body):
         time.sleep(5)
     else:
         time.sleep(1)
-    resp = requests.get(url)
+    try:
+        resp = requests.get(url, timeout=10)
+    except requests.RequestException as e:
+        print(f"Request failed: {e}")
+        # Do not requeue: a failing URL would otherwise be redelivered forever.
+        ch.basic_nack(delivery_tag=method.delivery_tag, requeue=False)
+        return
     print(f"Status code: {resp.status_code}")
     ch.basic_ack(delivery_tag=method.delivery_tag)
 

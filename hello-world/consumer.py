@@ -20,6 +20,8 @@ def consume(queue):
     host = os.environ.get('RABBITMQ_HOST', 'localhost')
     connection = get_connection(host)
     channel = connection.channel()
+    # Declaring is idempotent; it lets the consumer start before any producer has created the queue.
+    channel.queue_declare(queue=queue)
     # Do not auto acknowledge messages. Messages should be acknowledged manually.
     channel.basic_consume(queue, on_message_callback=on_message_callback, auto_ack=False)
     channel.start_consuming()
